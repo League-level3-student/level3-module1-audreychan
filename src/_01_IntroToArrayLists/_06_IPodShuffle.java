@@ -1,5 +1,7 @@
 package _01_IntroToArrayLists;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,20 +22,48 @@ import javax.swing.JPanel;
 		 */
 
 
-public class _06_IPodShuffle{
+public class _06_IPodShuffle implements ActionListener{
 	
 	ArrayList<Song> songs = new ArrayList<Song>();
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	JButton playRandom = new JButton("Play Random");
-	
-	public _06_IPodShuffle() {
-		songs.add(e)
-	}
+	Random rand = new Random();
+	int num = 0;
 	
 	public static void main(String[] args) {
-		new _06_IPodShuffle();
-
+		_06_IPodShuffle iPod = new _06_IPodShuffle();
+		iPod.setup();
 	}
 	
+	public _06_IPodShuffle() {
+		songs.add(new Song("Death of a Bachelor.mp3"));
+		songs.add(new Song("Thnks fr th Mmrs.mp3"));
+		songs.add(new Song("Helena.mp3"));
+		songs.add(new Song("Thank You for the Venom.mp3"));
+		songs.add(new Song("To the End.mp3"));
+		songs.add(new Song("Dead!.mp3"));
+		songs.add(new Song("Welcome to the Black Parade.mp3"));
+		songs.add(new Song("Na Na Na"));
+		
+	}
+
+	void setup() {
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.add(panel);
+		panel.add(playRandom);
+		frame.pack();
+		
+		playRandom.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		songs.get(num).stop();
+		num = rand.nextInt(songs.size() - 1);
+		songs.get(num).play();
+	}
 }
